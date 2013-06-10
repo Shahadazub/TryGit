@@ -10,5 +10,14 @@
     <string name="title_activity_pills">PillsActivity</string>
     <string name="title_activity_pills_settings">PillsSettingsActivity</string>
     <string name="Pills_Availabilit_TextView">Наличие:</string>
+    <string name="name_activity_pills_settings">Название</string>
+    <string name="type_activity_pills_settings">Вид</string>
+    <string name="pills_activity_pills_settings">Таблетки</string>
+    <string name="syringe_activity_pills_settings">Уколы</string>
+    <string name="elixir_activity_pills_settings">Микстура</string>
+    <string name="alarm_activity_pills_settings">Оповещать о закупке</string>
+    <string name="save_activity_pills_settings">Сохранить</string>
+    <string name="change_activity_pills_settings">Изменить</string>
+    <string name="delete_activity_pills_settings">Удалить</string>
 
 </resources>
