@@ -19,5 +19,6 @@
     <string name="save_activity_pills_settings">Сохранить</string>
     <string name="change_activity_pills_settings">Изменить</string>
     <string name="delete_activity_pills_settings">Удалить</string>
+    <string name="new_activity_pills">Добавить</string>
 
 </resources>

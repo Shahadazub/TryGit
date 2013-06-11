@@ -43,7 +43,7 @@
                         android:textSize="24dp" />
 
                     <EditText
-                        android:id="@+id/editText1"
+                        android:id="@+id/pillsSettings_Name_editText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -87,7 +87,7 @@
                             android:layout_height="wrap_content" >
 
                             <RadioButton
-                                android:id="@+id/radioButton1"
+                                android:id="@+id/pillsSettings_pillsType_radioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:checked="true"
@@ -95,14 +95,14 @@
                                 android:textSize="20dp" />
 
                             <RadioButton
-                                android:id="@+id/radioButton2"
+                                android:id="@+id/pillsSettings_syringeType_radioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/syringe_activity_pills_settings"
                                 android:textSize="20dp" />
 
                             <RadioButton
-                                android:id="@+id/radioButton3"
+                                android:id="@+id/pillsSettings_elixirType_radioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/elixir_activity_pills_settings"
@@ -131,7 +131,7 @@
                         android:textSize="24dp" />
 
                     <CheckBox
-                        android:id="@+id/checkBox1"
+                        android:id="@+id/pillsSettings_Alarm_checkBox"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </TableRow>

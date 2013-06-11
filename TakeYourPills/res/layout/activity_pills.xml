@@ -124,4 +124,12 @@
 
     </ScrollView>
 
+    <Button
+        android:id="@+id/pills_new_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/new_activity_pills" />
+
 </RelativeLayout>

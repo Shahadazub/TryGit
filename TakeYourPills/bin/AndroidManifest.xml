@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="8"
-        android:targetSdkVersion="8" />
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -14,13 +14,21 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.shahadazub.takeyourpills.MainActivity"
+            android:name="MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="PillsActivity"
+            android:label="@string/title_activity_pills" >
+        </activity>
+        <activity
+            android:name="PillsSettingsActivity"
+            android:label="@string/title_activity_pills_settings" >
         </activity>
     </application>
 

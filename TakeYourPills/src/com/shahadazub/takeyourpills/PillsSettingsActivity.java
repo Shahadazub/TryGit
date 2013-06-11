@@ -2,12 +2,22 @@ package com.shahadazub.takeyourpills;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 
-public class PillsSettingsActivity extends Activity {
+public class PillsSettingsActivity extends Activity implements OnClickListener {
+	
+	Button btnSaveChange, btnDelete;
+	EditText etName;
+	
+	Integer type, alram;
 	
 	DBHelper dbHelper;
 
@@ -15,6 +25,14 @@ public class PillsSettingsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_pills_settings);
+		
+		btnSaveChange = (Button) findViewById(R.id.pillsSettings_saveChange_button);
+		btnSaveChange.setOnClickListener(this);
+		
+		btnDelete = (Button) findViewById(R.id.pillsSettings_delete_button);
+		btnDelete.setOnClickListener(this);
+		
+		etName = (EditText) findViewById(R.id.pillsSettings_Name_editText);
 		
 		dbHelper = new DBHelper(this);
 	}
@@ -46,6 +64,16 @@ public class PillsSettingsActivity extends Activity {
 		public void onUpgrade (SQLiteDatabase db, int oldVersion, int newVersion){
 			
 		}
+	}
+
+	public void onClick(View v) {
+		
+		ContentValues cv = new ContentValues();
+		
+		String name = etName.getText().toString();
+		
+		
+		
 	}
 
 }
