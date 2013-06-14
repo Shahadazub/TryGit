@@ -4,20 +4,31 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 
 public class PillsSettingsActivity extends Activity implements OnClickListener {
 	
 	Button btnSaveChange, btnDelete;
 	EditText etName;
+	RadioGroup RGType;
+	CheckBox selChBAlarm;
 	
-	Integer type, alram;
+	Context context;
+	
+	int type, alarm;
+	int empty = 0;
+	
+	final String L = "MyLog";
 	
 	DBHelper dbHelper;
 
@@ -34,6 +45,8 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		
 		etName = (EditText) findViewById(R.id.pillsSettings_Name_editText);
 		
+		RGType = (RadioGroup) findViewById(R.id.pillsSettings_Type_radioGroup);
+		
 		dbHelper = new DBHelper(this);
 	}
 
@@ -41,8 +54,12 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.pills_settings, menu);
+		Log.d(L, "--- Pills Settings Strated ---");
 		return true;
 	}
+	
+	
+	
 	
 	class DBHelper extends SQLiteOpenHelper {
 
@@ -52,10 +69,11 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		
 		@Override
 		public void onCreate(SQLiteDatabase db) {
+			Log.d(L, "--- Cresting DB with table pills: ---");
 			db.execSQL("create table pills ("
 					+ "id integer primary key autoincrement,"
-					+ "name text"
-					+ "type integer"
+					+ "name text,"
+					+ "type integer,"
 					+ "alarm integer"
 					+ ");");
 		}
@@ -70,9 +88,76 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		
 		ContentValues cv = new ContentValues();
 		
+		
+		
 		String name = etName.getText().toString();
 		
+		int SelRBType = RGType.getCheckedRadioButtonId();
+		switch (SelRBType){
+		case R.id.pillsSettings_elixirType_radioButton:
+			type = 3;
+			break;
+		case R.id.pillsSettings_pillsType_radioButton:
+			type = 1;
+			break;
+		case R.id.pillsSettings_syringeType_radioButton:
+			type = 2;
+			break;
+		}
+		 
+		selChBAlarm = (CheckBox) findViewById(R.id.pillsSettings_Alarm_checkBox);
+		if (selChBAlarm.isChecked()){
+			alarm = 1;
+		} else {
+			alarm = 0;
+		}
+		Log.d(L, "--- Got every data ---");
 		
+		//context.deleteDatabase("myDB");
+		Log.d(L, "--- DB deleated and asking for writable DB ---");
+		SQLiteDatabase db = dbHelper.getWritableDatabase();
+		
+		
+		switch (v.getId()){
+		case R.id.pillsSettings_saveChange_button:
+			// Сюда надо вставить проверку на то, какая кнопка показывается, а также делать поля изменяемыми или нет.
+			// Еще надо сделать проверку заполненности и всплывающее предупреждение
+			
+			cv.put("name", name);
+			cv.put("type", type);
+			cv.put("alarm", alarm);
+			
+			long rowID = db.insert("pills", null, cv);
+			Log.d(L, "--- SaveChange pushed:" + name + type + alarm + " ---");
+			break;
+		case R.id.pillsSettings_delete_button:
+			Log.d(L, "--- Delete button pushed: ---");
+			if (empty == 1){
+				Cursor c = db.query("pills", null, null, null, null, null, null);
+				if (c.moveToFirst()){
+					int ColIndexId = c.getColumnIndex("id");
+					int ColIndexName = c.getColumnIndex("name");
+					int ColIndexAlarm = c.getColumnIndex("alarm");
+					int ColIndexType = c.getColumnIndex("type");
+					
+					etName.setText(c.getString(ColIndexName));
+				}else{
+					etName.setText("Гдето косяк");
+				}
+				empty = 0;
+			} else {
+				etName.setText("");
+				selChBAlarm.setChecked(false);
+				RGType.clearCheck();
+				empty = 1;
+			
+			}
+		
+			
+		
+		}
+		
+		dbHelper.close();
 		
 	}
 

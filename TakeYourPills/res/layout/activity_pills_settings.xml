@@ -82,7 +82,7 @@
                         android:orientation="vertical" >
 
                         <RadioGroup
-                            android:id="@+id/radioGroup1"
+                            android:id="@+id/pillsSettings_Type_radioGroup"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" >
 

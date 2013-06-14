@@ -25,7 +25,7 @@ public class PillsActivity extends Activity implements OnClickListener {
 		
 		btnAdd = (Button) findViewById(R.id.pills_new_button);
 		btnAdd.setOnClickListener(this);
-		
+		 
 		
 	}
 
@@ -41,7 +41,7 @@ public class PillsActivity extends Activity implements OnClickListener {
 		case R.id.pills_new_button:
 			Intent intent = new Intent (this, PillsSettingsActivity.class);
 			startActivity(intent);
-			break;
+			break; 
 		}
 	}
 

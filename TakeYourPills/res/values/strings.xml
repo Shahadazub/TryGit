@@ -3,7 +3,6 @@
 
     <string name="app_name">TakeYourPills</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="Main_MyMedikit_Button">Аптечка</string>
     <string name="Main_Pills_Button">Лекарства</string>
     <string name="Main_Schedule_Button">Расписание</string>
