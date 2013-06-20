@@ -19,7 +19,7 @@ import android.widget.RadioGroup;
 public class PillsSettingsActivity extends Activity implements OnClickListener {
 	
 	Button btnSaveChange, btnDelete;
-	EditText etName;
+	EditText etName, etIndaMedikit, etCapacity;
 	RadioGroup RGType;
 	CheckBox selChBAlarm;
 	
@@ -44,10 +44,17 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		btnDelete.setOnClickListener(this);
 		
 		etName = (EditText) findViewById(R.id.pillsSettings_Name_editText);
+		etIndaMedikit = (EditText) findViewById(R.id.pills_settings_indaMedikit_editText);
+		etCapacity = (EditText) findViewById(R.id.pills_settings_capacity_editText);
 		
 		RGType = (RadioGroup) findViewById(R.id.pillsSettings_Type_radioGroup);
 		
+		
+		
 		dbHelper = new DBHelper(this);
+		Log.d(L, "--- Everything created and we want to delete DB ---");
+		//context.deleteDatabase("myDB");
+		//Log.d(L, "--- DB deleted ---");
 	}
 
 	@Override
@@ -74,7 +81,10 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 					+ "id integer primary key autoincrement,"
 					+ "name text,"
 					+ "type integer,"
-					+ "alarm integer"
+					+ "alarm integer,"
+					+ "measure integer,"
+					+ "indamedikit real,"
+					+ "capacity real"
 					+ ");");
 		}
 		
@@ -113,8 +123,8 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		}
 		Log.d(L, "--- Got every data ---");
 		
-		//context.deleteDatabase("myDB");
-		Log.d(L, "--- DB deleated and asking for writable DB ---");
+		
+		Log.d(L, "--- Asking for writable DB ---");
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		
 		
@@ -126,9 +136,11 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 			cv.put("name", name);
 			cv.put("type", type);
 			cv.put("alarm", alarm);
+			cv.put("indamedikit", etIndaMedikit.getText().toString());
+			cv.put("capacity", etCapacity.getText().toString());
 			
 			long rowID = db.insert("pills", null, cv);
-			Log.d(L, "--- SaveChange pushed:" + name + type + alarm + " ---");
+			Log.d(L, "--- SaveChange pushed:" + name + " " + type + " " + alarm + " " + etIndaMedikit.getText().toString() + " " + etCapacity.getText().toString() + " " + " ---");
 			break;
 		case R.id.pillsSettings_delete_button:
 			Log.d(L, "--- Delete button pushed: ---");
@@ -141,6 +153,24 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 					int ColIndexType = c.getColumnIndex("type");
 					
 					etName.setText(c.getString(ColIndexName));
+					if (c.getInt(ColIndexAlarm) == 0) {
+						selChBAlarm.setChecked(false);
+					} else {
+						selChBAlarm.setChecked(true);
+					}
+					switch (c.getInt(ColIndexType)){
+					case 1:
+						RGType.check(R.id.pillsSettings_pillsType_radioButton);
+						break;
+					case 3:
+						RGType.check(R.id.pillsSettings_elixirType_radioButton);
+						break;
+					case 2:
+						RGType.check(R.id.pillsSettings_syringeType_radioButton);
+						break;
+					}
+						
+					
 				}else{
 					etName.setText("Гдето косяк");
 				}
@@ -150,6 +180,8 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 				selChBAlarm.setChecked(false);
 				RGType.clearCheck();
 				empty = 1;
+				etCapacity.setText("");
+				etIndaMedikit.setText("");
 			
 			}
 		

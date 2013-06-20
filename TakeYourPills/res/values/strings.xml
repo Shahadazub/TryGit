@@ -8,7 +8,7 @@
     <string name="Main_Schedule_Button">Расписание</string>
     <string name="title_activity_pills">PillsActivity</string>
     <string name="title_activity_pills_settings">PillsSettingsActivity</string>
-    <string name="Pills_Availabilit_TextView">Наличие:</string>
+    <string name="Pills_Availability_TextView">Наличие:</string>
     <string name="name_activity_pills_settings">Название</string>
     <string name="type_activity_pills_settings">Вид</string>
     <string name="pills_activity_pills_settings">Таблетки</string>
@@ -19,5 +19,12 @@
     <string name="change_activity_pills_settings">Изменить</string>
     <string name="delete_activity_pills_settings">Удалить</string>
     <string name="new_activity_pills">Добавить</string>
+    <string name="measure_activity_pills_settings">Ед.измерения</string>
+    <string name="inda_medikit_pills_settings">В аптечке</string>
+    
+    <string name="one_pill_capacity_pills_settings">В 1 таблетке</string>
+    <string name="one_syringe_capacity_pills_settings">В 1 шприце</string>
+    <string name="one_doze_capacity_pills_settings">В 1 дозе</string>
+    <string name="amount_pills_settings">Количество и наличие</string>
 
 </resources>
