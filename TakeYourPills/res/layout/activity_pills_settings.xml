@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/name_activity_pills_settings"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <EditText
                         android:id="@+id/pillsSettings_Name_editText"
@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:textSize="24dp" >
+                        android:textSize="24sp" >
 
                         <requestFocus />
                     </EditText>
@@ -74,7 +74,7 @@
                         android:gravity="center_vertical"
                         android:text="@string/type_activity_pills_settings"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -93,21 +93,21 @@
                                 android:layout_height="wrap_content"
                                 android:checked="true"
                                 android:text="@string/pills_activity_pills_settings"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
 
                             <RadioButton
                                 android:id="@+id/pillsSettings_syringeType_radioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/syringe_activity_pills_settings"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
 
                             <RadioButton
                                 android:id="@+id/pillsSettings_elixirType_radioButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/elixir_activity_pills_settings"
-                                android:textSize="20dp" />
+                                android:textSize="20sp" />
                         </RadioGroup>
                     </LinearLayout>
                 </TableRow>
@@ -129,7 +129,7 @@
                         android:layout_gravity="center"
                         android:text="@string/alarm_activity_pills_settings"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                     <CheckBox
                         android:id="@+id/pillsSettings_Alarm_checkBox"
@@ -156,7 +156,7 @@
                         android:gravity="center_vertical|center_horizontal|center"
                         android:text="@string/amount_pills_settings"
                         android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:textSize="24dp" />
+                        android:textSize="24sp" />
 
                 </TableRow>
 
@@ -256,14 +256,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/change_activity_pills_settings"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/pillsSettings_delete_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/delete_activity_pills_settings"
-            android:textSize="24dp" />
+            android:textSize="24sp" />
 
     </TableRow>
 

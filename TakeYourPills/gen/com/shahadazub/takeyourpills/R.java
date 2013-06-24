@@ -27,17 +27,17 @@ public final class R {
         public static final int ic_syringe=0x7f020003;
     }
     public static final class id {
-        public static final int ImageView01=0x7f08000e;
-        public static final int ImageView02=0x7f080009;
+        public static final int ImageView01=0x7f08000f;
+        public static final int ImageView02=0x7f08000a;
         public static final int LinearLayout1=0x7f080012;
         public static final int Main_Aid_Button=0x7f080005;
         public static final int Main_Pills_Button=0x7f080001;
         public static final int Main_Schedule_Button=0x7f080003;
-        public static final int Pills_Scroll=0x7f080007;
-        public static final int TextView01=0x7f08000d;
-        public static final int TextView02=0x7f080008;
+        public static final int Pills_Scroll=0x7f080008;
+        public static final int TextView01=0x7f08000e;
+        public static final int TextView02=0x7f080009;
         public static final int action_settings=0x7f080028;
-        public static final int imageView1=0x7f080010;
+        public static final int imageView1=0x7f080011;
         public static final int pillsSettings_Alarm_checkBox=0x7f080019;
         public static final int pillsSettings_Name_editText=0x7f080014;
         public static final int pillsSettings_Type_radioGroup=0x7f080015;
@@ -46,12 +46,12 @@ public final class R {
         public static final int pillsSettings_pillsType_radioButton=0x7f080016;
         public static final int pillsSettings_saveChange_button=0x7f080026;
         public static final int pillsSettings_syringeType_radioButton=0x7f080017;
-        public static final int pills_new_button=0x7f080011;
+        public static final int pills_new_button=0x7f080006;
         public static final int pills_settings_capacity_editText=0x7f080023;
         public static final int pills_settings_capacity_textView=0x7f080022;
         public static final int pills_settings_indaMedikit_editText=0x7f080020;
         public static final int pills_settings_measure_spinner=0x7f08001d;
-        public static final int scrollView1=0x7f080006;
+        public static final int scrollView1=0x7f080007;
         public static final int tableRow1=0x7f080000;
         public static final int tableRow10=0x7f08001b;
         public static final int tableRow2=0x7f080002;
@@ -62,10 +62,10 @@ public final class R {
         public static final int tableRow7=0x7f080024;
         public static final int tableRow8=0x7f08001e;
         public static final int tableRow9=0x7f080021;
-        public static final int textView1=0x7f08000f;
-        public static final int textView2=0x7f08000a;
-        public static final int textView3=0x7f08000b;
-        public static final int textView4=0x7f08000c;
+        public static final int textView1=0x7f080010;
+        public static final int textView2=0x7f08000b;
+        public static final int textView3=0x7f08000c;
+        public static final int textView4=0x7f08000d;
         public static final int textView5=0x7f08001f;
         public static final int textView7=0x7f08001c;
     }

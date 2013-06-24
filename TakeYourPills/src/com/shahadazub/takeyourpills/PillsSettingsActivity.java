@@ -26,7 +26,7 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 	Context context;
 	
 	int type, alarm;
-	int empty = 0;
+	
 	
 	final String L = "MyLog";
 	
@@ -52,9 +52,9 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		
 		
 		dbHelper = new DBHelper(this);
-		Log.d(L, "--- Everything created and we want to delete DB ---");
-		//context.deleteDatabase("myDB");
-		//Log.d(L, "--- DB deleted ---");
+		Log.d(L, "--- Everything created ---");
+		
+		
 	}
 
 	@Override
@@ -140,50 +140,20 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 			cv.put("capacity", etCapacity.getText().toString());
 			
 			long rowID = db.insert("pills", null, cv);
-			Log.d(L, "--- SaveChange pushed:" + name + " " + type + " " + alarm + " " + etIndaMedikit.getText().toString() + " " + etCapacity.getText().toString() + " " + " ---");
+			Log.d(L, "--- SaveChange pushed: name=" + name + " type=" + type + " alarm=" + alarm + " indmedikit=" + etIndaMedikit.getText().toString() + " capacity=" + etCapacity.getText().toString() + " " + " ---");
 			break;
 		case R.id.pillsSettings_delete_button:
 			Log.d(L, "--- Delete button pushed: ---");
-			if (empty == 1){
-				Cursor c = db.query("pills", null, null, null, null, null, null);
-				if (c.moveToFirst()){
-					int ColIndexId = c.getColumnIndex("id");
-					int ColIndexName = c.getColumnIndex("name");
-					int ColIndexAlarm = c.getColumnIndex("alarm");
-					int ColIndexType = c.getColumnIndex("type");
-					
-					etName.setText(c.getString(ColIndexName));
-					if (c.getInt(ColIndexAlarm) == 0) {
-						selChBAlarm.setChecked(false);
-					} else {
-						selChBAlarm.setChecked(true);
-					}
-					switch (c.getInt(ColIndexType)){
-					case 1:
-						RGType.check(R.id.pillsSettings_pillsType_radioButton);
-						break;
-					case 3:
-						RGType.check(R.id.pillsSettings_elixirType_radioButton);
-						break;
-					case 2:
-						RGType.check(R.id.pillsSettings_syringeType_radioButton);
-						break;
-					}
-						
-					
-				}else{
-					etName.setText("Гдето косяк");
-				}
-				empty = 0;
-			} else {
-				etName.setText("");
+			db.execSQL("DROP TABLE pills");
+			Log.d(L, "--- Table DROPED (deleted) ---");
+				etName.setText("Table deleted");
 				selChBAlarm.setChecked(false);
 				RGType.clearCheck();
-				empty = 1;
+				
 				etCapacity.setText("");
 				etIndaMedikit.setText("");
 			
-			}
+			
 		
 			
 		

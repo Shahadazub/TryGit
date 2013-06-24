@@ -8,13 +8,20 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PillsActivity" >
 
+    <Button
+        android:id="@+id/pills_new_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/new_activity_pills" />
+
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-       >
+        android:layout_alignBottom="@+id/pills_new_button"
+        android:layout_alignLeft="@+id/pills_new_button" >
 
         <LinearLayout
             android:id="@+id/Pills_Scroll"
@@ -69,8 +76,8 @@
                     android:layout_below="@+id/TextView02"
                     android:layout_toRightOf="@+id/textView3"
                     android:text="таб."
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
-
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="14sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -84,7 +91,8 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="Large Text"
-                    android:textAppearance="?android:attr/textAppearanceLarge" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="24sp" />
 
                 <ImageView
                     android:id="@+id/ImageView01"
@@ -115,21 +123,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_elixir" />
-
             </RelativeLayout>
-
         </LinearLayout>
-
-        
-
     </ScrollView>
-
-    <Button
-        android:id="@+id/pills_new_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:text="@string/new_activity_pills" />
 
 </RelativeLayout>
