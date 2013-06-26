@@ -2,6 +2,7 @@ package com.shahadazub.takeyourpills;
 
 import com.shahadazub.takeyourpills.PillsSettingsActivity.DBHelper;
 
+import android.R.color;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
@@ -27,7 +28,7 @@ public class PillsActivity extends Activity implements OnClickListener {
 	
 	DBHelper dbHelper;
 	
-	LinearLayout pills_scroll;
+	LinearLayout pillsScroll;
 	
 	Context context;
 	
@@ -35,17 +36,18 @@ public class PillsActivity extends Activity implements OnClickListener {
 	
 	final String L = "MyLog";
 	
-
+	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_pills);
-		Log.d(L, "--- PillsActivity layout started ---");
-		
-		btnAdd = (Button) findViewById(R.id.pills_new_button);
+	  protected void onStart() {
+	    super.onStart();
+	    Log.d(L, "MainActivity: onStart()");
+	    
+	    btnAdd = (Button) findViewById(R.id.pills_new_button);
 		btnAdd.setOnClickListener(this);
 		
-		pills_scroll = (LinearLayout) findViewById(R.id.Pills_Scroll);
+		pillsScroll = (LinearLayout) findViewById(R.id.Pills_Scroll);
+		pillsScroll.removeAllViews();
+		
 		Log.d(L, "--- Now ill try to open DB ---");
 		
 		dbHelper = new DBHelper(this);
@@ -69,12 +71,18 @@ public class PillsActivity extends Activity implements OnClickListener {
 		
 		Log.d(L, "--- Cursor moved to the first row and there are " + c.getCount() + "rows ---");
 		
-		for (int i = 1; i < (c.getCount() + 1); i++) {
+		for (int i = 0; i < (c.getCount()); i++) {
 			Log.d(L, "--- Iteration" + i + "---");
-					
-			RelativeLayout rlPillsRow = new RelativeLayout(this);
 			
-			pills_scroll.addView(rlPillsRow);
+			RelativeLayout.LayoutParams rlPillsRowParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+			
+			RelativeLayout rlPillsRow = new RelativeLayout(this);
+			rlPillsRow.setLayoutParams(rlPillsRowParams);
+			rlPillsRow.setClickable(true);
+			rlPillsRow.setOnClickListener(this);
+			rlPillsRow.setId(i);
+			
+			pillsScroll.addView(rlPillsRow);
 			
 			
 			RelativeLayout.LayoutParams tvNameParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT); 
@@ -115,8 +123,7 @@ public class PillsActivity extends Activity implements OnClickListener {
 				iconId = R.drawable.ic_elixir;	
 				break;
 			default:
-				break;
-			
+				break;			
 			}
 			
 			RelativeLayout.LayoutParams ivIconParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -128,15 +135,41 @@ public class PillsActivity extends Activity implements OnClickListener {
 			ivIcon.setImageResource(iconId);
 			
 			rlPillsRow.addView(ivIcon);
-			
-			
-			
+						
 			
 			
 			
 			
 			c.moveToNext();
 		}
+		dbHelper.close();
+	  }
+
+	  @Override
+	  protected void onResume() {
+	    super.onResume();
+	    Log.d(L, "MainActivity: onResume()");
+	  }
+
+	  @Override
+	  protected void onPause() {
+	    super.onPause();
+	    Log.d(L, "MainActivity: onPause()");
+	  }
+
+	  @Override
+	  protected void onStop() {
+	    super.onStop();
+	    Log.d(L, "MainActivity: onStop()");
+	  }
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_pills);
+		Log.d(L, "--- PillsActivity layout started ---");
+		
+		
 	}
 
 	@Override
@@ -149,13 +182,18 @@ public class PillsActivity extends Activity implements OnClickListener {
 	}
 	
 	public void onClick(View v) {
+		Log.d(L, "--- Button add pushed ---");
+		Intent intent = new Intent (this, PillsSettingsActivity.class);
 		switch (v.getId()){
 		case R.id.pills_new_button:
-			Intent intent = new Intent (this, PillsSettingsActivity.class);
-			startActivity(intent);
+			intent.putExtra("string", 0);
+			
 			break; 
+		default:
+			Log.d(L, "--- LayoutRow ZERO pushed ---");
+			intent.putExtra("string", v.getId());
 		}
-		dbHelper.close();
+		startActivity(intent);			
 	}
 	
 	

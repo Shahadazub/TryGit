@@ -26,5 +26,6 @@
     <string name="one_syringe_capacity_pills_settings">В 1 шприце</string>
     <string name="one_doze_capacity_pills_settings">В 1 дозе</string>
     <string name="amount_pills_settings">Количество и наличие</string>
+    <string name="cancel_activity_pills_settings">Отмена</string>
 
 </resources>
