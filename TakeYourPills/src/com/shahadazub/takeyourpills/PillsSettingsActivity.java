@@ -12,26 +12,31 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class PillsSettingsActivity extends Activity implements OnClickListener {
 	
 	Button btnSaveChange, btnDelete;
 	EditText etName, etIndaMedikit, etCapacity;
+	TextView tvIndamedikit, tvCapacity;
 	RadioGroup RGType;
 	CheckBox chBAlarm;
 	Cursor c;
-	
+	Spinner spMeasure;
 	Context context;
 	
 	int type, alarm, rowNumber;
 	
 	String name;
-	
 	
 	final String L = "MyLog";
 	
@@ -52,14 +57,45 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		etIndaMedikit = (EditText) findViewById(R.id.pills_settings_indaMedikit_editText);
 		etCapacity = (EditText) findViewById(R.id.pills_settings_capacity_editText);
 		
+		tvIndamedikit = (TextView) findViewById(R.id.pills_settings_indamedikit_textView);
+		tvCapacity = (TextView) findViewById(R.id.pills_settings_capacity_textView);
+		
+		spMeasure = (Spinner) findViewById(R.id.spinner1);
+		spMeasure.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int arg2, long arg3) {
+				// TODO Auto-generated method stub
+				changeAllTexts();				
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub				
+			}			
+		});
+		
+		
 		RGType = (RadioGroup) findViewById(R.id.pillsSettings_Type_radioGroup);
+		RGType.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				// TODO Auto-generated method stub
+				changeAllTexts();
+			}
+		});
 		
 		chBAlarm = (CheckBox) findViewById(R.id.pillsSettings_Alarm_checkBox);
 		
 		
+		changeAllTexts();
+		
 		dbHelper = new DBHelper(this);
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		Log.d(L, "--- Everything created ---");
+		
+		//db.execSQL("drop table pills");
+		
 		Intent intent = getIntent();
 		rowNumber = intent.getExtras().getInt("string");
 		Log.d(L, "--- String from intent is: " + rowNumber + " ---");
@@ -72,7 +108,7 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 			btnDelete.setText(R.string.delete_activity_pills_settings);
 			
 			c = db.query("pills", null, null, null, null, null, null);
-			c.moveToPosition(rowNumber);
+			c.moveToPosition(rowNumber - 1);
 			
 			etName.setText(c.getString(c.getColumnIndex("name")));
 			etIndaMedikit.setText(c.getString(c.getColumnIndex("indamedikit")));
@@ -132,7 +168,7 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 					+ "name text,"
 					+ "type integer,"
 					+ "alarm integer,"
-					+ "measure integer,"
+					+ "measure text,"
 					+ "indamedikit real,"
 					+ "capacity real"
 					+ ");");
@@ -149,21 +185,7 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		
 		ContentValues cv = new ContentValues();		
 		name = etName.getText().toString();
-		
-		int SelRBType = RGType.getCheckedRadioButtonId();
-		switch (SelRBType){
-		case R.id.pillsSettings_elixirType_radioButton:
-			type = 3;
-			break;
-		case R.id.pillsSettings_pillsType_radioButton:
-			type = 1;
-			break;
-		case R.id.pillsSettings_syringeType_radioButton:
-			type = 2;
-			break;
-		}
-		 
-		
+				
 		if (chBAlarm.isChecked()){
 			alarm = 1;
 		} else {
@@ -184,6 +206,7 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 				cv.put("alarm", alarm);
 				cv.put("indamedikit", etIndaMedikit.getText().toString());
 				cv.put("capacity", etCapacity.getText().toString());
+				cv.put("measure", spMeasure.getSelectedItem().toString());
 				Log.d(L, "--- Every data puted into CV ---");
 				
 				if (rowNumber == 0) {	
@@ -213,5 +236,28 @@ public class PillsSettingsActivity extends Activity implements OnClickListener {
 		startActivity(newIntent);
 		
 	}
+	
+	public void changeAllTexts(){
+		int SelRBType = RGType.getCheckedRadioButtonId();
+		switch (SelRBType){
+		case R.id.pillsSettings_pillsType_radioButton:
+			type = 1;
+			tvIndamedikit.setText(getString(R.string.inda_medikit_pills_settings) + " " + getString(R.string.pillsSettings_indamedikitPills) + " ");
+			tvCapacity.setText(getString(R.string.pills_settings_capacity) + " " + getString(R.string.pillsSettings_capacityPills) + " " + spMeasure.getSelectedItem().toString() + " ");
+			break;
+		case R.id.pillsSettings_syringeType_radioButton:
+			type = 2;
+			tvIndamedikit.setText(getString(R.string.inda_medikit_pills_settings) + " " + getString(R.string.pillsSettings_indamedikitSyringeAndElixir) + " ");
+			tvCapacity.setText(getString(R.string.pills_settings_capacity) + " " + getString(R.string.pillsSettings_capacitySyringeAndElixir) + " " + spMeasure.getSelectedItem().toString() + " ");
+			break;
+		case R.id.pillsSettings_elixirType_radioButton:
+			type = 3;
+			tvIndamedikit.setText(getString(R.string.inda_medikit_pills_settings) + " " + getString(R.string.pillsSettings_indamedikitSyringeAndElixir) + " ");
+			tvCapacity.setText(getString(R.string.pills_settings_capacity) + " " + getString(R.string.pillsSettings_capacitySyringeAndElixir) + " " + spMeasure.getSelectedItem().toString() + " ");
+			break;
+		}
+	}
 
 }
+
+

@@ -25,6 +25,9 @@ public class MainActivity extends Activity implements OnClickListener {
 		
 		btnPills = (Button) findViewById(R.id.Main_Pills_Button);
 		btnPills.setOnClickListener(this);
+		
+		Button btnScheduleList = (Button) findViewById(R.id.but_schedule_list);
+		btnScheduleList.setOnClickListener(this);
 	}
 	
 	
@@ -33,6 +36,10 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()){
 		case R.id.Main_Pills_Button:
 			intent = new Intent (this, PillsActivity.class);
+			startActivity(intent);
+			break;
+		case R.id.but_schedule_list:
+			intent = new Intent (this, ScheduleListActivity.class);
 			startActivity(intent);
 			break;
 		default:

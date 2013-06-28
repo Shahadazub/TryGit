@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="MainActivity"
+            android:name="com.shahadazub.takeyourpills.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +23,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="PillsActivity"
+            android:name="com.shahadazub.takeyourpills.PillsActivity"
             android:label="@string/title_activity_pills" >
         </activity>
         <activity
-            android:name="PillsSettingsActivity"
+            android:name="com.shahadazub.takeyourpills.PillsSettingsActivity"
             android:label="@string/title_activity_pills_settings" >
+        </activity>
+        <activity
+            android:name="com.shahadazub.takeyourpills.ScheduleListActivity"
+            android:label="@string/title_activity_schedule_list" >
+        </activity>
+        <activity
+            android:name="com.shahadazub.takeyourpills.ScheduleAddActivity"
+            android:label="@string/title_activity_schedule_add" >
         </activity>
     </application>
 

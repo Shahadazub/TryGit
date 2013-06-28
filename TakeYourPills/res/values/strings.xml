@@ -21,11 +21,33 @@
     <string name="new_activity_pills">Добавить</string>
     <string name="measure_activity_pills_settings">Ед.измерения</string>
     <string name="inda_medikit_pills_settings">В аптечке</string>
-    
     <string name="one_pill_capacity_pills_settings">В 1 таблетке</string>
     <string name="one_syringe_capacity_pills_settings">В 1 шприце</string>
     <string name="one_doze_capacity_pills_settings">В 1 дозе</string>
     <string name="amount_pills_settings">Количество и наличие</string>
     <string name="cancel_activity_pills_settings">Отмена</string>
+    <string name="need_for_next_week_pills_settings">Расход на неделю</string>
+    <string name="pills_settings_capacity">В</string>
+
+    <string-array name="pills_settings_array_measure">
+        <item>&quot;мг&quot;</item>
+        <item>&quot;мл&quot;</item>
+        <item>&quot;гр&quot;</item>
+        <item>&quot;дл&quot;</item>
+        <item>&quot;дг&quot;</item>
+        <item>&quot;порции&quot;</item>
+        <item>&quot;ложки&quot;</item>
+        <item>&quot;шт&quot;</item>
+    </string-array>
+
+    <string name="pillsSettings_indamedikitPills">таблеток</string>
+    <string name="pillsSettings_indamedikitSyringeAndElixir">бутыльков</string>
+    <string name="pillsSettings_capacityPills">одной таблетке</string>
+    <string name="pillsSettings_capacitySyringeAndElixir">одном бутыльке</string>
+    <string name="pillsSettings_measurePrompt">Единицы измерения</string>
+    <string name="title_activity_schedule_list">ScheduleListActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="to_the_menu">&quot;В меню&quot;</string>
+    <string name="title_activity_schedule_add">ScheduleAddActivity</string>
 
 </resources>

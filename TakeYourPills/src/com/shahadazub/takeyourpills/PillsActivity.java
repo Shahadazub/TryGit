@@ -24,7 +24,7 @@ import android.widget.TextView;
 
 public class PillsActivity extends Activity implements OnClickListener {
 	
-	Button btnAdd;
+	Button btnAdd, btnToMenu;
 	
 	DBHelper dbHelper;
 	
@@ -44,6 +44,9 @@ public class PillsActivity extends Activity implements OnClickListener {
 	    
 	    btnAdd = (Button) findViewById(R.id.pills_new_button);
 		btnAdd.setOnClickListener(this);
+		
+		btnToMenu = (Button) findViewById(R.id.but_scheduleList_toMenu);
+		btnToMenu.setOnClickListener(this);
 		
 		pillsScroll = (LinearLayout) findViewById(R.id.Pills_Scroll);
 		pillsScroll.removeAllViews();
@@ -71,7 +74,7 @@ public class PillsActivity extends Activity implements OnClickListener {
 		
 		Log.d(L, "--- Cursor moved to the first row and there are " + c.getCount() + "rows ---");
 		
-		for (int i = 0; i < (c.getCount()); i++) {
+		for (int i = 1; i < (c.getCount() + 1); i++) {
 			Log.d(L, "--- Iteration" + i + "---");
 			
 			RelativeLayout.LayoutParams rlPillsRowParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -90,11 +93,10 @@ public class PillsActivity extends Activity implements OnClickListener {
 			tvNameParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, RelativeLayout.TRUE);
 			
 			TextView tvName = new TextView (this);
-			tvName.setText(c.getString(c.getColumnIndex("name")));
+			tvName.setText(c.getString(c.getColumnIndex("name")) + " " + c.getString(c.getColumnIndex("capacity")) + " " + c.getString(c.getColumnIndex("measure")));
 			tvName.setLayoutParams(tvNameParams);
 			tvName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-			//tvName.setId(q);
-			//++q;
+			
 			
 			rlPillsRow.addView(tvName);
 			
@@ -112,7 +114,6 @@ public class PillsActivity extends Activity implements OnClickListener {
 			
 			
 			switch (c.getInt(c.getColumnIndex("type"))) {
-			
 			case 1:
 				iconId = R.drawable.ic_pills;
 				break;
@@ -182,17 +183,24 @@ public class PillsActivity extends Activity implements OnClickListener {
 	}
 	
 	public void onClick(View v) {
-		Log.d(L, "--- Button add pushed ---");
-		Intent intent = new Intent (this, PillsSettingsActivity.class);
+		
+		Intent intent;
 		switch (v.getId()){
-		case R.id.pills_new_button:
-			intent.putExtra("string", 0);
-			
-			break; 
-		default:
-			Log.d(L, "--- LayoutRow ZERO pushed ---");
-			intent.putExtra("string", v.getId());
-		}
+			case R.id.pills_new_button:
+				Log.d(L, "--- NewBut pushed ---");
+				intent = new Intent (this, PillsSettingsActivity.class);
+				intent.putExtra("string", 0);			
+				break; 
+			case R.id.but_scheduleList_toMenu:
+				Log.d(L, "--- ToMenuBut pushed ---");
+				intent = new Intent (this, MainActivity.class);
+				break;
+			default:
+				Log.d(L, "--- LayoutRow ZERO pushed ---");
+				intent = new Intent (this, PillsSettingsActivity.class);
+				intent.putExtra("string", v.getId());
+				break;
+			}
 		startActivity(intent);			
 	}
 	
